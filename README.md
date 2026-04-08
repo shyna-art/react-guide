@@ -294,4 +294,3 @@ Your mentor will review your progress by visiting your forked repository on GitH
 
 ---
 
-*Built with ❤️ for students learning React at CIT-U.*
