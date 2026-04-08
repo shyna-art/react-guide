@@ -14,6 +14,7 @@
 - [Step 3 — Create Your Vite + React Project](#step-3--create-your-vite--react-project)
 - [Step 4 — Run the Development Server](#step-4--run-the-development-server)
 - [Step 5 — Project Structure](#step-5--project-structure)
+- [📚 Learning Guides](#-learning-guides)
 - [Learning Phases](#learning-phases)
 - [How to Submit Your Work](#how-to-submit-your-work)
 - [Tips & Reminders](#tips--reminders)
@@ -160,12 +161,26 @@ react-guide/
 
 ---
 
+## 📚 Learning Guides
+
+Before diving into the phases, read the dedicated guide for each concept. These guides explain the *why* behind each step so you understand what you are doing — not just copy code.
+
+| Guide | What you will learn | Read before |
+|-------|---------------------|-------------|
+| [`Components/README.md`](./Components/README.md) | What the `components/` folder is, how to break UI into pieces, component relationships, best practices, common mistakes | Phase 01 |
+| [`props/README.md`](./props/README.md) | What props are, data flow, destructuring, passing functions, the `key` prop, common mistakes | Phase 02 |
+| [`useState/README.md`](./useState/README.md) | What state is, `useState` syntax, `addToCart`, `removeFromCart`, derived values, common mistakes | Phase 03–05 |
+
+---
+
 ## Learning Phases
 
 Work through each phase in order. Do not skip ahead — each phase builds on the last.
 
 ### Phase 01 — Your First Component
 **Goal:** Render a static `ProductCard` component on the screen.
+
+> 📖 **Read first:** [`Components/README.md`](./Components/README.md) — sections 1, 2, and 4 (best practices)
 
 - Clean up `App.jsx` (delete the boilerplate content)
 - Create `src/components/ProductCard.jsx`
@@ -178,6 +193,8 @@ Work through each phase in order. Do not skip ahead — each phase builds on the
 
 ### Phase 02 — Props and Product Listing
 **Goal:** Make `ProductCard` reusable by passing data through props.
+
+> 📖 **Read first:** [`props/README.md`](./props/README.md) — all sections
 
 - Create `src/data/products.js` with an array of 5+ product objects
 - Each product should have: `id`, `name`, `price`, `description`, `image`
@@ -192,6 +209,8 @@ Work through each phase in order. Do not skip ahead — each phase builds on the
 ### Phase 03 — useState and Add to Cart
 **Goal:** Make the "Add to Cart" button functional using React state.
 
+> 📖 **Read first:** [`useState/README.md`](./useState/README.md) — sections 1–4
+
 - Add a button to `ProductCard`
 - Create a `cart` state in `App.jsx` using `useState`
 - Write an `addToCart` function and pass it as a prop to `ProductCard`
@@ -203,6 +222,8 @@ Work through each phase in order. Do not skip ahead — each phase builds on the
 
 ### Phase 04 — Cart Display and Remove Item
 **Goal:** Show what is in the cart and allow removal.
+
+> 📖 **Re-read:** [`useState/README.md`](./useState/README.md) — section 6 (`removeFromCart`) and [`Components/README.md`](./Components/README.md) — section 3 (component relationships)
 
 - Create `src/components/Cart.jsx`
 - Pass the `cart` array to `Cart` as a prop
@@ -217,6 +238,8 @@ Work through each phase in order. Do not skip ahead — each phase builds on the
 
 ### Phase 05 — Total Price
 **Goal:** Compute and display the total price without storing it in state.
+
+> 📖 **Re-read:** [`useState/README.md`](./useState/README.md) — section 7 (derived values — no extra state needed)
 
 - Use `.reduce()` on the cart array to calculate the total
 - Display the total at the bottom of the cart
