@@ -1,32 +1,46 @@
-import React from 'react'
-import Card from '../components/Card'
-import ScarletRomance from '../assets/images/ScarletRomance.jpg'
-import BlushingLove from '../assets/images/BlushingLove.jpg'
-import GoldenGlow from '../assets/images/GoldenGlow.jpg'
-import SummerCharm from '../assets/images/SummerCharm.jpg'
-import SunshineBliss from '../assets/images/SunshineBliss.jpg'
-import TulipDream from '../assets/images/TulipDream.jpg'
-import PureElegance from '../assets/images/TulipDream.jpg'
-
-
-
-
+import React, { useState, useEffect } from 'react';
+import { supabase } from '../supabaseClient'; // Import Supabase client
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
+import BlushingLoveImage from '../assets/images/BlushingLove.jpg';
+import GoldenGlowImage from '../assets/images/GoldenGlow.jpg';
+import PureEleganceImage from '../assets/images/PureElegance.jpg';
+import ScarletRomanceImage from '../assets/images/ScarletRomance.jpg';
+import SunshineBlissImage from '../assets/images/SunshineBliss.jpg';
+import Card from '../components/Card';
 
 const Dashboard = () => {
-    return (
-        <div className="card-container">
+  const [products, setProducts] = useState([
+    { id: 1, name: 'Scarlet Romance', price: 1200, image: ScarletRomanceImage },
+    { id: 2, name: 'Blushing Love', price: 1350, image: BlushingLoveImage },
+    { id: 3, name: 'Pure Elegance', price: 1400, image: PureEleganceImage },
+    { id: 4, name: 'Sunshine Bliss', price: 1500, image: SunshineBlissImage },
+  ]);
+  const [user, setUser] = useState(null); // State to store user info
+  const navigate = useNavigate(); // For navigating to login page if not authenticated
 
-            <Card image={ScarletRomance} name="Scarlet Romance" price={1200} />
-            <Card image={BlushingLove} name="Blushing Love"  price={1350}/>
-            <Card image={PureElegance} name="Pure Elegance" price={1400}/>
-            <Card image={SunshineBliss} name="Sunshine Bliss" price={1500}/>
-            <Card image={GoldenGlow} name="Golden Glow" price={1450}/>
-            <Card image={SummerCharm} name="Summer Charm" price={1650}/>
-            <Card image={TulipDream} name="Tulip Dream" price={2500}/>
-            
-            
-        </div>
-    )
-}
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser(); // Get the user from Supabase
+      if (!user) {
+        navigate('/'); // Redirect to the login page if the user is not authenticated
+      }
+      setUser(user); // Set the authenticated user
+    };
 
-export default Dashboard
+    checkAuth(); // Run the check on component mount
+  }, [navigate]);
+
+  if (!user) {
+    return <div>Loading...</div>; // Loading message while checking authentication
+  }
+
+  return (
+    <div className="card-container">
+      {products.map(item => (
+        <Card key={item.id} name={item.name} price={item.price} image={item.image} />
+      ))}
+    </div>
+  );
+};
+
+export default Dashboard;
